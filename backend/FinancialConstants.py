@@ -44,14 +44,6 @@ class FinancialConstants:
             brackets.update({bracket[0]: bracket[1]})
         return brackets
 
-    def calculate_tax(self, monthly_income, tax_brackets, stamp_duty):
-        final_result: float = 0.0
-        """
-        Tax formula:
-        """
-        annual_income = monthly_to_yearly(monthly_income)
-        final_result = ...
-
     def convert_bracket_values_to_dict(self, tax_brackets: dict):
         bracket_dict: dict = {}
         for bracket_index, bracket_content in tax_brackets.items():
