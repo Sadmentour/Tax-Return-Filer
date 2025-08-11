@@ -8,6 +8,7 @@ class FinancialConstants:
         self.rent_brackets: dict = {}
         self.rent_brackets_length: int = 0
         self.pension_brackets, self.rent_brackets = self.get_tax_brackets()
+        
 
     def get_constants(self):
         pass
@@ -25,6 +26,9 @@ class FinancialConstants:
         self.rent_brackets = self.parse_brackets_from_json("rent_data", tax_constants)
 
         return self.convert_bracket_values_to_dict(self.pension_brackets), self.convert_bracket_values_to_dict(self.rent_brackets)
+
+    def find_coefficient(self, tax_brackets: dict):
+        pass
 
     @staticmethod
     def parse_brackets_from_json(data_field: str, constants_object: dict):
