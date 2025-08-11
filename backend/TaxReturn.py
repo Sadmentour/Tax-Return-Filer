@@ -7,9 +7,7 @@ class TaxReturn:
         self.income_details: dict = {}
     
     def calculate_tax(self, monthly_income, tax_brackets, stamp_duty):
-        final_result: float = 0.0
-        """
-        Tax formula:
-        """
+        whole_payment: float = 0.0
+
         annual_income = monthly_to_yearly(monthly_income)
         final_result = ...
