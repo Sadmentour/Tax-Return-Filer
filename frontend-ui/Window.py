@@ -2,8 +2,8 @@ import ttkbootstrap as tbs
 
 class Window(tbs.Window):
     def __init__(
-        self, title="ttkbootstrap",
-        themename="litera",
+        self, title="Tax Return Filer",
+        themename="sandstone",
         iconphoto='',
         size=None,
         position=None,
@@ -35,4 +35,10 @@ class Window(tbs.Window):
         )
 
     def create_widget_objects(self):
+        pass
+
+    def place_widgets(self):
+        pass
+
+    def unplace_widgets(self):
         pass
