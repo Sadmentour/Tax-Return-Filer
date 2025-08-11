@@ -48,11 +48,6 @@ class FinancialConstants:
             bracket_dict.update({bracket_index: bracket_content})
         return bracket_dict
 
-    @staticmethod
-    def monthly_to_yearly(income: float):
-        MONTHS_IN_A_YEAR: int = 12
-        return income * MONTHS_IN_A_YEAR
-
 
 if __name__ == "__main__":
     c1 = FinancialConstants()
