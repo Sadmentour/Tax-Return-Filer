@@ -1,3 +1,4 @@
+from utils.conversions import monthly_to_yearly
 import json
 
 class FinancialConstants:
@@ -36,9 +37,8 @@ class FinancialConstants:
         final_result: float = 0.0
         """
         Tax formula:
-
         """
-        annual_income = self.monthly_to_yearly(monthly_income)
+        annual_income = monthly_to_yearly(monthly_income)
         final_result = ...
 
     def convert_bracket_values_to_dict(self, tax_brackets: dict):

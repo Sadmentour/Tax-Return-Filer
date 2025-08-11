@@ -1,3 +1,17 @@
 def monthly_to_yearly(income: float):
         MONTHS_IN_A_YEAR: int = 12
         return income * MONTHS_IN_A_YEAR
+
+def make_precent(number: float, precent: float = 100.0, digit_resolution: int = 6):
+        """
+        Takes a number from 0 to 100 and
+        divides it by a number to make it
+        a precentage coefficient
+
+        *(Default is 100)*
+        """
+        return round(number / precent, digit_resolution) if precent != 0 else None
+
+
+if __name__ == "__main__":
+        print(make_precent(3.6, 100))
