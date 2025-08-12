@@ -44,7 +44,7 @@ class TaxReturn:
             n = str(n + 1)
             bracket = bracket_dict[n]
 
-            if       income == 0:                          return bracket[2] # raise ValueError("Income cannot be zero.")
+            if       income == 0:                          return bracket[2] # (deleted command) raise ValueError("Income cannot be zero.")
             elif bracket[1] == "Infinity":                 return bracket[2]
             elif bracket[0] <= floor(income) < bracket[1]: return bracket[2]
             
