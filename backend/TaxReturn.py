@@ -23,9 +23,10 @@ class TaxReturn:
         stamp_duty: float = 0.0
         year_payment_whole: float = 0.0
         annual_income = monthly_to_yearly(monthly_income)
-        precent_temp = self.choose_bracket(income=annual_income,
+        precent_temp = self.choose_bracket(
             bracket_dict=eval(f"self.financial_constants.{income_type}_brackets"),
-            brackets_length=eval(f"self.financial_constants.{income_type}_brackets_length")
+            brackets_length=eval(f"self.financial_constants.{income_type}_brackets_length"),
+            income=annual_income
         )
 
         taxed_precent = precent_temp
