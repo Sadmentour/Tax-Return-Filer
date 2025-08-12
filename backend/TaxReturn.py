@@ -31,9 +31,8 @@ class TaxReturn:
         taxed_precent = precent_temp
         stamp_duty = self.calculate_stamp(f"{income_type}_data", self.financial_constants.constants)
         taxed_precent = make_precent(taxed_precent)
-        print(self.financial_constants.constants["pension_data"]["stamp_duty"])
 
-        if stamp_duty:
+        if stamp_duty is not None:
             stamp_duty = make_precent(stamp_duty)
             year_payment_whole = (annual_income * taxed_precent) + (annual_income * stamp_duty)
         year_payment_whole = (annual_income * taxed_precent)
@@ -45,7 +44,7 @@ class TaxReturn:
             n = str(n + 1)
             bracket = bracket_dict[n]
 
-            if       income == 0:                          raise ValueError("Income cannot be zero.")
+            if       income == 0:                          return bracket[2] # raise ValueError("Income cannot be zero.")
             elif bracket[1] == "Infinity":                 return bracket[2]
             elif bracket[0] <= floor(income) < bracket[1]: return bracket[2]
             
@@ -55,5 +54,9 @@ class TaxReturn:
 
 if __name__ == "__main__":
     tr = TaxReturn()
-    payment = tr.calculate_income_tax(5_607_33, "pension")
-    print(f"${payment:,.2f}")
+    payment_p = tr.calculate_income_tax(float(input("Monthly Pension income: ")), "pension")
+    payment_r = tr.calculate_income_tax(float(input("Monthly Rent income: ")), "rent")
+    combined_payment = payment_p + payment_r
+    print(f"Pension tax: ${payment_p:,.2f}")
+    print(f"Rent tax: ${payment_r:,.2f}")
+    print(f"Combined tax: ${combined_payment:,.2f}")
