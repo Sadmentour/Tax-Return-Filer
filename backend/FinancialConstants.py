@@ -1,7 +1,7 @@
 import json
 
 class FinancialConstants:
-    def __init__(self, file: str = "data/financialConstants.json"):
+    def __init__(self, file: str = "jsons/financialConstants.json"):
         self.pension_brackets: dict = {}
         self.pension_brackets_length: int = 0
         self.pension_stamp_duty: float = 0

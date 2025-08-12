@@ -1,4 +1,5 @@
 import ttkbootstrap as tbs
+from widget_constants import *
 
 INCOME_TAX: str = "income-tax"
 
@@ -28,7 +29,4 @@ class InputForm:
 
 
 if __name__ == "__main__":
-    w = tbs.Window()
-    e = tbs.Entry(w, show="Hello, world!")
-    e.pack()
-    w.mainloop()
+    print(f"input_form.py: {__name__}")
