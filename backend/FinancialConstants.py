@@ -1,13 +1,13 @@
-from utils.conversions import monthly_to_yearly
 import json
 
 class FinancialConstants:
-    def __init__(self, file: str = "backend/financialConstants.json"):
+    def __init__(self, file: str = "jsons/financialConstants.json"):
         self.pension_brackets: dict = {}
         self.pension_brackets_length: int = 0
         self.pension_stamp_duty: float = 0
         self.rent_brackets: dict = {}
         self.rent_brackets_length: int = 0
+        self.rent_stamp_duty: float = 0
         self.constants: dict = {}
         with open(file, "r") as constants:
             self.constants: dict = json.load(constants)
