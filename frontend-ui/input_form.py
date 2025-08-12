@@ -1,5 +1,4 @@
 import ttkbootstrap as tbs
-from data.global_constants import *
 
 INCOME_TAX: str = "income-tax"
 
