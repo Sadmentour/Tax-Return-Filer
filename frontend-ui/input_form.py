@@ -9,19 +9,41 @@ class InputForm:
         self.master: tbs.Window = master
         self.type: str = input_type
         self.income_prefix: str = income_prefix
+        self.has_initialized: bool = False
         self.select_type()
 
     def select_type(self):
+        """
+        Every time this method is changed or appended,
+        the following methods might need updating:
+
+        * forget_all_widgets()
+
+        Update them according to docstrings
+        """
+        if self.has_initialized:
+            self.forget_all_widgets()
         if self.type == INCOME_TAX:
             self.init_income_tax_widgets()
         else:
             raise ValueError(f"Invalid <input_type> entry: \"{self.type}\".")
+    
+    def forget_all_widgets(self):
+        """
+        Update by adding grid(or pack)_forget() for every
+        top-level (parent frame, etc...) of each initialization
+        type
+        """
+        self.containter_frame.grid_forget()
 
     def init_income_tax_widgets(self):
         self.containter_frame: FRM = tbs.Frame(self.master)
 
+        self.wage_labelframe: LBF = tbs.Labelframe(self.containter_frame, text="Monthly Wage")
         self.pension_labelframe: LBF = tbs.Labelframe(self.containter_frame, text="Monthly Pension")
         self.rent_labelframe: LBF = tbs.Labelframe(self.containter_frame, text="Monthly Rent")
+
+        self.wage_entry: LBF = tbs.Entry(self.wage_labelframe, width=15)
 
         self.pension_entry: ENT = tbs.Entry(self.pension_labelframe, width=15)
 
@@ -30,8 +52,11 @@ class InputForm:
     def place_income_tax_widgets(self, grid_row: int, grid_column: int, grid_margin_xy: float, widget_margin_xy: float):
         self.containter_frame.grid(row=grid_row, column=grid_column, padx=grid_margin_xy, pady=grid_margin_xy)
 
-        self.pension_labelframe.grid(row=0, column=0, padx=widget_margin_xy+1, pady=widget_margin_xy)
-        self.rent_labelframe.grid(row=0, column=1, padx=widget_margin_xy+1, pady=widget_margin_xy)
+        self.wage_labelframe.grid(row=0, column=0, padx=widget_margin_xy+1, pady=widget_margin_xy)
+        self.pension_labelframe.grid(row=0, column=1, padx=widget_margin_xy+1, pady=widget_margin_xy)
+        self.rent_labelframe.grid(row=0, column=2, padx=widget_margin_xy+1, pady=widget_margin_xy)
+
+        self.wage_entry.grid(row=0, column=0, padx=widget_margin_xy, pady=widget_margin_xy)
 
         self.pension_entry.grid(row=0, column=0, padx=widget_margin_xy, pady=widget_margin_xy)
 
