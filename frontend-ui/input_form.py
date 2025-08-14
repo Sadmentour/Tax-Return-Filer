@@ -1,11 +1,8 @@
 import ttkbootstrap as tbs
 from widget_constants import *
 
-INCOME_TAX: str = "income-tax"
-
-
 class InputForm:
-    def __init__(self, master: tbs.Window, input_type: str = "income-tax", income_prefix: str = "Monthly"):
+    def __init__(self, master: tbs.Window, input_type: str = FRAMED_ENTRIES, income_prefix: str = "Monthly"):
         self.master: tbs.Window = master
         self.type: str = input_type
         self.income_prefix: str = income_prefix
@@ -23,25 +20,28 @@ class InputForm:
         """
         if self.has_initialized:
             self.forget_all_widgets()
-        if self.type == INCOME_TAX:
-            self.init_income_tax_widgets()
+        if self.type == FRAMED_ENTRIES:
+            self.init_framed_entries_widgets()
         else:
             raise ValueError(f"Invalid <input_type> entry: \"{self.type}\".")
-    
+        self.has_initialized = True
+
     def forget_all_widgets(self):
         """
-        Update by adding grid(or pack)_forget() for every
+        Update by adding destroy() for every
         top-level (parent frame, etc...) of each initialization
         type
         """
-        self.containter_frame.grid_forget()
+        self.containter_frame.destroy()
 
-    def init_income_tax_widgets(self):
+    def init_framed_entries_widgets(self):
         self.containter_frame: FRM = tbs.Frame(self.master)
 
-        self.wage_labelframe: LBF = tbs.Labelframe(self.containter_frame, text="Monthly Wage")
-        self.pension_labelframe: LBF = tbs.Labelframe(self.containter_frame, text="Monthly Pension")
-        self.rent_labelframe: LBF = tbs.Labelframe(self.containter_frame, text="Monthly Rent")
+        self.monthly_labelframe: LBF = tbs.Labelframe(self.containter_frame, text="Monthly", labelanchor="n")
+
+        self.wage_labelframe: LBF = tbs.Labelframe(self.monthly_labelframe, text="Wage", labelanchor="s", border=0)
+        self.pension_labelframe: LBF = tbs.Labelframe(self.monthly_labelframe, text="Pension", labelanchor="s", border=0)
+        self.rent_labelframe: LBF = tbs.Labelframe(self.monthly_labelframe, text="Rent", labelanchor="s", border=0)
 
         self.wage_entry: LBF = tbs.Entry(self.wage_labelframe, width=15)
 
@@ -49,8 +49,10 @@ class InputForm:
 
         self.rent_entry: ENT = tbs.Entry(self.rent_labelframe, width=15)
 
-    def place_income_tax_widgets(self, grid_row: int, grid_column: int, grid_margin_xy: float, widget_margin_xy: float):
+    def place_framed_entries_widgets(self, grid_row: int, grid_column: int, grid_margin_xy: float, widget_margin_xy: float):
         self.containter_frame.grid(row=grid_row, column=grid_column, padx=grid_margin_xy, pady=grid_margin_xy)
+
+        self.monthly_labelframe.grid(row=0, column=0, padx=widget_margin_xy, pady=widget_margin_xy)
 
         self.wage_labelframe.grid(row=0, column=0, padx=widget_margin_xy+1, pady=widget_margin_xy)
         self.pension_labelframe.grid(row=0, column=1, padx=widget_margin_xy+1, pady=widget_margin_xy)
@@ -67,5 +69,5 @@ if __name__ == "__main__":
     print(f"input_form.py: {__name__}")
     w = tbs.Window(themename="superhero")
     inp = InputForm(w)
-    inp.place_income_tax_widgets(0, 0, 2, 1)
+    inp.place_framed_entries_widgets(0, 0, 2, 1)
     w.mainloop()
