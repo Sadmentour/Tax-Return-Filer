@@ -44,9 +44,7 @@ class InputForm:
         self.rent_labelframe: LBF = tbs.Labelframe(self.monthly_labelframe, text="Rent", labelanchor="s", border=0)
 
         self.wage_entry: LBF = tbs.Entry(self.wage_labelframe, width=15)
-
         self.pension_entry: ENT = tbs.Entry(self.pension_labelframe, width=15)
-
         self.rent_entry: ENT = tbs.Entry(self.rent_labelframe, width=15)
 
     def place_framed_entries_widgets(self, widget_margin_xy: float):
@@ -59,9 +57,7 @@ class InputForm:
         self.rent_labelframe.grid(row=0, column=2, padx=widget_margin_xy+1, pady=widget_margin_xy)
 
         self.wage_entry.grid(row=0, column=0, padx=widget_margin_xy, pady=widget_margin_xy)
-
         self.pension_entry.grid(row=0, column=0, padx=widget_margin_xy, pady=widget_margin_xy)
-
         self.rent_entry.grid(row=0, column=0, padx=widget_margin_xy, pady=widget_margin_xy)
 
 
