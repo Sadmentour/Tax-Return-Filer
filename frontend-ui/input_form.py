@@ -49,8 +49,8 @@ class InputForm:
 
         self.rent_entry: ENT = tbs.Entry(self.rent_labelframe, width=15)
 
-    def place_framed_entries_widgets(self, grid_row: int, grid_column: int, grid_margin_xy: float, widget_margin_xy: float):
-        self.containter_frame.grid(row=grid_row, column=grid_column, padx=grid_margin_xy, pady=grid_margin_xy)
+    def place_framed_entries_widgets(self, widget_margin_xy: float):
+        self.containter_frame.pack(padx=5, anchor="center", expand=True)
 
         self.monthly_labelframe.grid(row=0, column=0, padx=widget_margin_xy, pady=widget_margin_xy)
 
