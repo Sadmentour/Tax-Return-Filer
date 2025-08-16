@@ -13,10 +13,10 @@ window = tbs.Window(
     maxsize=WMAX_GEOMETRY
     
 )
-window.geometry("395x148")
+window.geometry(f"{WMAX_GEOMETRY[0]}x{WMAX_GEOMETRY[1]}")
 
 input_form = InputForm(window, FRAMED_ENTRIES, "Monthly")
-output_fields = OutputFields(window, SELECTABLE_LABELS)
+output_fields = OutputFields(window,  SELECTABLE_LABELS)
 
 input_form.place_framed_entries_widgets(2)
 output_fields.place_selectable_labels_widgets(5, 2)
