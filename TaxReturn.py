@@ -1,5 +1,5 @@
-from FinancialConstants import FinancialConstants as fc
-from utils.conversions import *
+import FinancialConstants as fc
+from conversions import *
 from math import floor
 
 class TaxReturn:
@@ -7,7 +7,7 @@ class TaxReturn:
         self.income: float = 0.0
         self.income_increase: float = 0.0
         self.income_details: dict = {}
-        self.financial_constants: fc = fc() # Explicitly set the 'file' parameter if file isn't found
+        self.financial_constants: fc.FinancialConstants = fc.FinancialConstants() # Explicitly set the 'file' parameter if file isn't found
                                             # File Name: "financialConstants.json"
         self.financial_constants.init_constants
 
@@ -16,7 +16,7 @@ class TaxReturn:
         Calculates the tax based on taxing brackets and the stamp duty precent
 
         For now, income types only include
-        'pension' and 'rent'
+        'wage' and 'rent'
         """
         bracket: int = 1
         taxed_precent: float = 0.0
@@ -53,6 +53,7 @@ class TaxReturn:
         stamp: float = constants_dict[constants_field]["stamp_duty"]
         return stamp if stamp != 0 else None
 
+"""
 if __name__ == "__main__":
     tr = TaxReturn()
     payment_p = tr.calculate_income_tax(float(input("Monthly Pension income: ")), "pension")
@@ -61,3 +62,4 @@ if __name__ == "__main__":
     print(f"Pension tax: ${payment_p:,.2f}")
     print(f"Rent tax: ${payment_r:,.2f}")
     print(f"Combined tax: ${combined_payment:,.2f}")
+"""

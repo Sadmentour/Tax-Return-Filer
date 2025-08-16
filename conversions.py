@@ -17,6 +17,8 @@ def make_precent(number: float, precent: float = 100.0, digit_resolution: int = 
 def currency_string(amount: float, currency_symbol: str, digits: int = 2):
     return f"{currency_symbol}{amount:,.{digits}f}"
 
+"""
 if __name__ == "__main__":
     c1 = currency_string(1002.4335, "$")
     print(c1)
+"""
