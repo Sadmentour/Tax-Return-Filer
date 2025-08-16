@@ -40,11 +40,11 @@ class OutputFields:
 
         self.yearly_labelframe: LBF = tbs.Labelframe(self.containter_frame, text="Yearly", labelanchor="n", width=60)
 
-        self.wage_labelframe: LBF = tbs.Labelframe(self.yearly_labelframe, text="Wage", labelanchor="s")
+        self.wage_labelframe: LBF = tbs.Labelframe(self.yearly_labelframe, text="Wage", labelanchor="s", border=0)
         self.wage_pension_separator: SEP = tbs.Separator(self.yearly_labelframe, orient="vertical")
-        self.pension_labelframe: LBF = tbs.Labelframe(self.yearly_labelframe, text="Pension", labelanchor="s")
+        self.pension_labelframe: LBF = tbs.Labelframe(self.yearly_labelframe, text="Pension", labelanchor="s", border=0)
         self.pension_rent_separator: SEP = tbs.Separator(self.yearly_labelframe, orient="vertical")
-        self.rent_labelframe: LBF = tbs.Labelframe(self.yearly_labelframe, text="Rent", labelanchor="s")
+        self.rent_labelframe: LBF = tbs.Labelframe(self.yearly_labelframe, text="Rent", labelanchor="s", border=0)
 
         self.wage_label: LBL = tbs.Label(self.wage_labelframe, text=currency_string(1000000000.25, self.currency_symbol), width=16, anchor="center")
         self.pension_label: LBL = tbs.Label(self.pension_labelframe, text=currency_string(1000000000.25, self.currency_symbol), width=17, anchor="center")
