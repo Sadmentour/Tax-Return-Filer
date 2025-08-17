@@ -90,21 +90,21 @@ main_frame.pack(anchor="nw")
 # Yearmonth Widgets
 #######################
 
-yearmonth_labelframe: LBF = ttk.Labelframe(main_frame, text="Income")
+yearmonth_labelframe: LBF = ttk.Labelframe(main_frame, text="Έσοδα")
 yearmonth_labelframe.grid(row=0, rowspan=2, column=0, padx=4, pady=4, sticky="ns")
 
-monthly_label: LBL = ttk.Label(yearmonth_labelframe, text="Monthly")
+monthly_label: LBL = ttk.Label(yearmonth_labelframe, text="Μηνιαίο")
 monthly_label.grid(row=0, column=0, padx=4, pady=8)
 
-annual_label: LBL = ttk.Label(yearmonth_labelframe, text="Annual")
+annual_label: LBL = ttk.Label(yearmonth_labelframe, text="Ετήσιο")
 annual_label.grid(row=1, column=0, padx=4, pady=5, sticky="s")
 
 #######################
 # Wage Widgets
 #######################
 
-wage_labelframe: LBF = ttk.Labelframe(main_frame, text="Wage", labelanchor="nw")
-wage_labelframe.grid(row=0, rowspan=2, column=1, padx=4, pady=4, sticky="ns")
+wage_labelframe: LBF = ttk.Labelframe(main_frame, text="Μισθός", labelanchor="nw")
+wage_labelframe.grid(row=0, rowspan=2, column=1, padx=4, pady=4, sticky="ew")
 
 wage_entry: ENT = ttk.Entry(wage_labelframe, textvariable=wage_value_month)
 wage_entry.grid(row=0, column=0, padx=4, pady=4)
@@ -115,8 +115,8 @@ wage_year.grid(row=1, column=0, padx=4, pady=4, sticky="w")
 # Pension Widgets
 #######################
 
-pension_labelframe: LBF = ttk.Labelframe(main_frame, text="Pension", labelanchor="nw")
-pension_labelframe.grid(row=0, rowspan=2, column=2, padx=4, pady=4, sticky="ns")
+pension_labelframe: LBF = ttk.Labelframe(main_frame, text="Σύνταξη", labelanchor="nw")
+pension_labelframe.grid(row=0, rowspan=2, column=2, padx=4, pady=4, sticky="ew")
 
 pension_entry: ENT = ttk.Entry(pension_labelframe, textvariable=pension_value_month)
 pension_entry.grid(row=0, column=0, padx=4, pady=4)
@@ -128,7 +128,7 @@ pension_year.grid(row=1, column=0, padx=4, pady=4, sticky="w")
 # Rent Widgets
 #######################
 
-rent_labelframe: LBF = ttk.Labelframe(main_frame, text="Rent", labelanchor="nw")
+rent_labelframe: LBF = ttk.Labelframe(main_frame, text="Ενοίκια", labelanchor="nw")
 rent_labelframe.grid(row=0, rowspan=2, column=3, padx=4, pady=4, sticky="ns")
 
 rent_entry: ENT = ttk.Entry(rent_labelframe, textvariable=rent_value_month)
@@ -139,27 +139,27 @@ rent_year.grid(row=1, column=0, padx=4, pady=4, sticky="w")
 
 ###########################################
 
-wage_gauge_labelframe: LBF = ttk.Labelframe(main_frame, text="Taxed Wage")
+wage_gauge_labelframe: LBF = ttk.Labelframe(main_frame, text="Φορολογιμένο Ποσό")
 wage_gauge_labelframe.grid(row=2, column=1, padx=4, sticky="we")
 wage_gauge: LBL = ttk.Label(wage_gauge_labelframe, text=f"€{0:,.2f}")
 wage_gauge.pack(padx=4, pady=4, anchor="w")
 
-pension_gauge_labelframe: LBF = ttk.Labelframe(main_frame, text="Taxed Pension")
+pension_gauge_labelframe: LBF = ttk.Labelframe(main_frame, text="Φορολογιμένο Ποσό")
 pension_gauge_labelframe.grid(row=2, column=2, padx=4, sticky="we")
 pension_gauge: LBL = ttk.Label(pension_gauge_labelframe, text=f"€{0:,.2f}")
 pension_gauge.pack(padx=4, pady=4, anchor="w")
 
-rent_gauge_labelframe: LBF = ttk.Labelframe(main_frame, text="Taxed Rent")
+rent_gauge_labelframe: LBF = ttk.Labelframe(main_frame, text="Φορολογιμένο Ποσό")
 rent_gauge_labelframe.grid(row=2, column=3, padx=4, sticky="we")
 rent_gauge: LBL = ttk.Label(rent_gauge_labelframe, text=f"€{0:,.2f}")
 rent_gauge.pack(padx=4, pady=4, anchor="w")
 
-total_labelframe: LBF = ttk.Labelframe(main_frame, text="Total Annual Income")
+total_labelframe: LBF = ttk.Labelframe(main_frame, text="Σύνολο Ετήσιων Εσόδων")
 total_labelframe.grid(row=3, column=1, padx=4, pady=4, sticky="we")
 total_gauge: LBL = ttk.Label(total_labelframe, text=f"€{0:,.2f}")
 total_gauge.pack(padx=4, pady=4, anchor="w")
 
-taxed_total_labelframe: LBF = ttk.Labelframe(main_frame, text="Taxed Total")
+taxed_total_labelframe: LBF = ttk.Labelframe(main_frame, text="Σύνολο Φορολογίσεων")
 taxed_total_labelframe.grid(row=3, column=3, padx=4, pady=4, sticky="we")
 taxed_total_gauge: LBL = ttk.Label(taxed_total_labelframe, text=f"€{0:,.2f}")
 taxed_total_gauge.pack(padx=4, pady=4, anchor="w")

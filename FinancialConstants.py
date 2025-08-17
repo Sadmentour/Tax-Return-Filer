@@ -3,6 +3,7 @@ import json
 class FinancialConstants:
     """Explicitly set the 'file' parameter File Name: 'financialConstants.json'"""
     def __init__(self, file: str = "jsons/financialConstants.json"):
+        self.file: str = file
         self.wage_brackets: dict = {}
         self.wage_brackets_length: int = 0
         self.wage_stamp_duty: float = 0
@@ -10,20 +11,18 @@ class FinancialConstants:
         self.rent_brackets_length: int = 0
         self.rent_stamp_duty: float = 0
         self.constants: dict = {}
-        with open(file, "r") as constants:
-            self.constants: dict = json.load(constants)
-        self.wage_brackets, self.rent_brackets = self.get_tax_brackets(self.constants)
+        self.init_constants()
+        # self.wage_brackets, self.rent_brackets = self.get_tax_brackets(self.constants)
 
     def init_constants(self):
+        with open(self.file, "r") as constants:
+            self.constants: dict = json.load(constants)
         self.get_tax_brackets(self.constants)
 
         self.wage_stamp_duty = self.get_stamp_duty("wage_data", self.constants)
         self.rent_stamp_duty = self.get_stamp_duty("rent_data", self.constants)
 
     def get_tax_brackets(self, constants: dict):
-        wage_brackets: dict = {}
-        rent_brackets: dict = {}
-
         self.wage_brackets_length = constants["wage_data"]["brackets_length"]
         self.rent_brackets_length = constants["rent_data"]["brackets_length"]
 
@@ -51,35 +50,3 @@ class FinancialConstants:
 
             bracket_dict.update({bracket_index: bracket_content})
         return bracket_dict
-
-"""
-if __name__ == "__main__":
-    c1 = FinancialConstants()
-
-    def print_dict_conversion(for_style=False):
-        var1, var2 = c1.get_tax_brackets(c1.constants)
-        if not for_style:
-            print(c1.convert_bracket_values_to_dict(var1))
-            print(c1.convert_bracket_values_to_dict(var2))
-            return None
-        for i, j in var1.items():
-            print(f"{i}: {j}")
-        print("---------------------------")
-        for i, j in var2.items():
-            print(f"{i}: {j}")
-
-    def print_brackets_length():
-        print(f"Wage: {c1.wage_brackets_length}")
-        print(f"Rent: {c1.rent_brackets_length}")
-
-
-    c1.init_constants()
-    print_dict_conversion(True)
-    print("-" * 173)
-    print(c1.wage_stamp_duty)
-    print(c1.rent_stamp_duty)
-    print(c1.wage_brackets_length)
-    print(c1.wage_brackets)
-    print(c1.rent_brackets_length)
-    print(c1.rent_brackets)
-"""
