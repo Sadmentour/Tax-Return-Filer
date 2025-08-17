@@ -25,7 +25,7 @@ def apply_values():
         rent_tax = monthly_to_yearly(rent_value_month.get())
     except TclError:
         messagebox.showerror(title="Only numbers", message="Your income must not contain anything"
-                                                         "that isn't a number.")
+                                                           "that isn't a number.")
 
     wage_year.config(text=f"€{wage_tax:,.2f}")
     pension_year.config(text=f"€{pension_tax:,.2f}")
@@ -82,9 +82,10 @@ menubar: MEN = ttk.Menu(window)
 window.config(menu=menubar)
 
 menus = {}
-menus['File'] = ttk.Menu(menubar, type='menubar')
-menus['Tools'] = ttk.Menu(menubar, type='menubar')
-menus['Help'] = ttk.Menu(menubar, type='normal')
+menus['File'] = ttk.Menu(menubar, type='menubar', tearoff=False)
+menus['Tools'] = ttk.Menu(menubar, type='menubar', tearoff=False)
+menus['Clear'] = ttk.Menu(menubar, type='menubar', tearoff=False)
+menus['Help'] = ttk.Menu(menubar, type='normal', tearoff=False)
 
 menus['File'].add_command(label="Εξαγωγή")
 menus['File'].add_command(label="Εισαγωγή")
@@ -93,7 +94,11 @@ menus['File'].add_command(label="Επεξεργασία Συντελεστών")
 
 menus['Tools'].add_command(label="Υπολογισμός", command=set_tax_gauges,)
 menus['Tools'].add_command(label="Εισαγωγή Τιμών", command=apply_values)
-menus['Tools'].add_command(label="Καθαρισμός", command=clear_entries)
+
+menus['Clear'].add_command(label="Καθαρισμός Πεδίων", command=clear_entries)
+menus['Clear'].add_command(label="Καθαρισμός Όλων", command=clear_entries)
+menus['Tools'].add_cascade(label="Καθαρισμός", menu=menus['Clear']) # Add options: Clear Entries (Καθαρισμός Πεδίων), Clear All (Καθαρισμός Όλων)
+
 menus['Tools'].add_separator()
 menus['Tools'].add_command(label="Φόρτοση Οικονομικών Συντελεστών", command=refresh_constants)
 
