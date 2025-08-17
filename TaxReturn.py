@@ -8,8 +8,7 @@ class TaxReturn:
         self.income_increase: float = 0.0
         self.income_details: dict = {}
         self.financial_constants: fc.FinancialConstants = fc.FinancialConstants() # Explicitly set the 'file' parameter if file isn't found
-                                            # File Name: "financialConstants.json"
-        self.financial_constants.init_constants
+        self.financial_constants.init_constants()                                 # File Name: "financialConstants.json"
 
     def calculate_income_tax(self, monthly_income: float, income_type: str):
         """
@@ -52,14 +51,3 @@ class TaxReturn:
     def calculate_stamp(self, constants_field: str, constants_dict: dict):
         stamp: float = constants_dict[constants_field]["stamp_duty"]
         return stamp if stamp != 0 else None
-
-"""
-if __name__ == "__main__":
-    tr = TaxReturn()
-    payment_p = tr.calculate_income_tax(float(input("Monthly Pension income: ")), "pension")
-    payment_r = tr.calculate_income_tax(float(input("Monthly Rent income: ")), "rent")
-    combined_payment = payment_p + payment_r
-    print(f"Pension tax: ${payment_p:,.2f}")
-    print(f"Rent tax: ${payment_r:,.2f}")
-    print(f"Combined tax: ${combined_payment:,.2f}")
-"""
