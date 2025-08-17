@@ -30,6 +30,11 @@ def apply_values():
     wage_year.config(text=f"€{wage_tax:,.2f}")
     pension_year.config(text=f"€{pension_tax:,.2f}")
     rent_year.config(text=f"€{rent_tax:,.2f}")
+    total_month_gauge.config(text=f"€{sum([
+        yearly_to_monthly(wage_tax),
+        yearly_to_monthly(pension_tax),
+        yearly_to_monthly(rent_tax)
+    ]):,.2f}")
     total_gauge.config(text=f"€{sum([
         wage_tax,
         pension_tax,
@@ -57,7 +62,13 @@ def set_tax_gauges():
         ]
     ):,.2f}")
 
-window: WIN = ttk.Window(title="Tax Return Filer", themename="sandstone", resizable=(False, False))
+def clear_entries():
+    wage_value_month.set(float(0))
+    pension_value_month.set(float(0))
+    rent_value_month.set(float(0))
+
+
+window: WIN = ttk.Window(title="Tax Return Filer", themename="united", resizable=(False, False))
 
 wage_value_month: DoubleVar = DoubleVar()
 pension_value_month: DoubleVar = DoubleVar()
@@ -71,20 +82,36 @@ menubar: MEN = ttk.Menu(window)
 window.config(menu=menubar)
 
 menus = {}
+menus['File'] = ttk.Menu(menubar, type='menubar')
 menus['Tools'] = ttk.Menu(menubar, type='menubar')
 menus['Help'] = ttk.Menu(menubar, type='normal')
 
-menus['Tools'].add_command(label="Load Fiscals", command=refresh_constants)
-menus['Tools'].add_command(label="Enter Values", command=apply_values)
-menus['Tools'].add_command(label="Calculate", command=set_tax_gauges)
+menus['File'].add_command(label="Εξαγωγή")
+menus['File'].add_command(label="Εισαγωγή")
+menus['File'].add_separator()
+menus['File'].add_command(label="Επεξεργασία Συντελεστών")
+
+menus['Tools'].add_command(label="Υπολογισμός", command=set_tax_gauges,)
+menus['Tools'].add_command(label="Εισαγωγή Τιμών", command=apply_values)
+menus['Tools'].add_command(label="Καθαρισμός", command=clear_entries)
+menus['Tools'].add_separator()
+menus['Tools'].add_command(label="Φόρτοση Οικονομικών Συντελεστών", command=refresh_constants)
 
 # menus['Help'].add_command(label=)
 
-menubar.add_cascade(label='Tools', menu=menus['Tools'])
-menubar.add_cascade(label='Help', command=help_box)
+menubar.add_cascade(label='Αρχείο', menu=menus['File'])
+menubar.add_cascade(label='Εργαλεία', menu=menus['Tools'])
+menubar.add_cascade(label='Βοήθεια', command=help_box)
 
 main_frame: FRM = ttk.Frame(window)
 main_frame.pack(anchor="nw")
+
+window_icon = ttk.PhotoImage(master=main_frame, file="Tax.png")
+window_icon = window_icon.subsample(2, 2)
+
+logo = ttk.Label(main_frame, image=window_icon)
+logo.grid(row=2, rowspan=2, column=0, sticky="nsew")
+window.iconphoto(False, window_icon)
 
 #######################
 # Yearmonth Widgets
@@ -158,6 +185,11 @@ total_labelframe: LBF = ttk.Labelframe(main_frame, text="Σύνολο Ετήσι
 total_labelframe.grid(row=3, column=1, padx=4, pady=4, sticky="we")
 total_gauge: LBL = ttk.Label(total_labelframe, text=f"€{0:,.2f}")
 total_gauge.pack(padx=4, pady=4, anchor="w")
+
+total_month_labelframe: LBF = ttk.Labelframe(main_frame, text="Σύνολο Μηνιαίων Εσόδων")
+total_month_labelframe.grid(row=3, column=2, padx=4, pady=4, sticky="we")
+total_month_gauge: LBL = ttk.Label(total_month_labelframe, text=f"€{0:,.2f}")
+total_month_gauge.pack(padx=4, pady=4, anchor="w")
 
 taxed_total_labelframe: LBF = ttk.Labelframe(main_frame, text="Σύνολο Φορολογίσεων")
 taxed_total_labelframe.grid(row=3, column=3, padx=4, pady=4, sticky="we")
