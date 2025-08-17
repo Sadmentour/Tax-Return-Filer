@@ -2,6 +2,10 @@ def monthly_to_yearly(income: float):
     MONTHS_IN_A_YEAR: int = 12
     return income * MONTHS_IN_A_YEAR
 
+def yearly_to_monthly(income: float):
+    MONTHS_IN_A_YEAR: int = 12
+    return income / MONTHS_IN_A_YEAR
+
 def make_precent(number: float, precent: float = 100.0, digit_resolution: int = 6):
     """
     Takes a number from 0 to 100 and
