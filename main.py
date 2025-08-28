@@ -9,7 +9,7 @@ from conversions import monthly_to_yearly, \
 tax_return = tR.TaxReturn()
 
 def help_box():
-    messagebox.showinfo(title="How to use", message=HELP_MESSAGE)
+    messagebox.showinfo(title="Οδηγίες Χρήσης", message=HELP_MESSAGE_EL)
 
 def refresh_constants():
     tax_return.financial_constants.init_constants()
@@ -35,6 +35,7 @@ def apply_values():
         yearly_to_monthly(pension_tax),
         yearly_to_monthly(rent_tax)
     ]):,.2f}")
+
     total_gauge.config(text=f"€{sum([
         wage_tax,
         pension_tax,
@@ -63,40 +64,72 @@ def set_tax_gauges():
     ):,.2f}")
 
 def clear_entries():
+    wage_value_month.set(0)
+    pension_value_month.set(float(0))
+    rent_value_month.set(float(0))
+
+def clear_all():
     wage_value_month.set(float(0))
     pension_value_month.set(float(0))
     rent_value_month.set(float(0))
 
+    wage_value_year.set(float(0))
+    pension_value_year.set(float(0))
+    rent_value_year.set(float(0))
+
+    wage_year.config(text=f"€{0:,.2f}")
+    pension_year.config(text=f"€{0:,.2f}")
+    rent_year.config(text=f"€{0:,.2f}")
+
+    wage_gauge.config(text=f"€{0:,.2f}")
+    pension_gauge.config(text=f"€{0:,.2f}")
+    rent_gauge.config(text=f"€{0:,.2f}")
+
+    total_gauge.config(text=f"€{0:,.2f}")
+    total_month_gauge.config(text=f"€{0:,.2f}")
+    taxed_total_gauge.config(text=f"€{0:,.2f}")
+
+def exit_program():
+    exit()
+
 
 window: WIN = ttk.Window(title="Tax Return Filer", themename="united", resizable=(False, False))
 
-wage_value_month: DoubleVar = DoubleVar()
-pension_value_month: DoubleVar = DoubleVar()
-rent_value_month: DoubleVar = DoubleVar()
+wage_value_month: DoubleVar = DoubleVar(value=0)
+pension_value_month: DoubleVar = DoubleVar(value=0)
+rent_value_month: DoubleVar = DoubleVar(value=0)
 
-wage_value_year: DoubleVar = DoubleVar()
-pension_value_year: DoubleVar = DoubleVar()
-rent_value_year: DoubleVar = DoubleVar()
+wage_value_year: DoubleVar = DoubleVar(value=0)
+pension_value_year: DoubleVar = DoubleVar(value=0)
+rent_value_year: DoubleVar = DoubleVar(value=0)
 
 menubar: MEN = ttk.Menu(window)
 window.config(menu=menubar)
 
 menus = {}
 menus['File'] = ttk.Menu(menubar, type='menubar', tearoff=False)
+menus['Print'] = ttk.Menu(menubar, type='menubar', tearoff=False)
 menus['Tools'] = ttk.Menu(menubar, type='menubar', tearoff=False)
 menus['Clear'] = ttk.Menu(menubar, type='menubar', tearoff=False)
 menus['Help'] = ttk.Menu(menubar, type='normal', tearoff=False)
 
 menus['File'].add_command(label="Εξαγωγή")
 menus['File'].add_command(label="Εισαγωγή")
+
+menus['Print'].add_command(label="Προεπισκόπιση")
+menus['Print'].add_command(label="Γρήγορη εκτύπωση")
+menus['Print'].add_command(label="Εκτύπωση με προεπισκόπιση")
+menus['File'].add_cascade(label="Εκτύπωση", menu=menus['Print'])
+
 menus['File'].add_separator()
 menus['File'].add_command(label="Επεξεργασία Συντελεστών")
+menus['File'].add_command(label="Έξοδος", command=exit_program)
 
 menus['Tools'].add_command(label="Υπολογισμός", command=set_tax_gauges,)
 menus['Tools'].add_command(label="Εισαγωγή Τιμών", command=apply_values)
 
 menus['Clear'].add_command(label="Καθαρισμός Πεδίων", command=clear_entries)
-menus['Clear'].add_command(label="Καθαρισμός Όλων", command=clear_entries)
+menus['Clear'].add_command(label="Καθαρισμός Όλων", command=clear_all)
 menus['Tools'].add_cascade(label="Καθαρισμός", menu=menus['Clear']) # Add options: Clear Entries (Καθαρισμός Πεδίων), Clear All (Καθαρισμός Όλων)
 
 menus['Tools'].add_separator()
